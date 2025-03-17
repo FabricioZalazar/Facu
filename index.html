@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0px;
+            position: relative;
+        }
+        #boton {
+            margin-top: 10px;
+            width: 200px;
+            height: 100px;
+            position:absolute;
+            left: 45%;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="boton" onclick="arrancar()">GO!</button>
+    <div id="caja">
+
+    </div>
+    <script>
+        function arrancar() {
+            let contenedor1 = { edad: 25, pelo: "largo", barba: true };
+            let contenedor2 = { pelo: "largo", barba: true };
+
+            let caja = document.querySelector("#caja");
+            caja.innerHTML += `<ul>`;
+            Object.keys(contenedor1).forEach(key => {
+                caja.innerHTML += `<li>${key}: ${contenedor1[key]}</li>`;
+            });
+            caja.innerHTML += `</ul>`;
+
+            caja.innerHTML += `<ul>`;
+            Object.keys(contenedor2).forEach(key => {
+                caja.innerHTML += `<li>${key}: ${contenedor2[key]}</li>`;
+            });
+
+            caja.innerHTML += `</ul>`;
+
+
+            let a = document.querySelector("#txt");
+
+            let comparar = (contenedor1, contenedor2, mensaje) => {
+
+                let bandera = Object.keys(contenedor1).every(key => key in contenedor2);
+                let resultado = `Resultado = ${bandera} ${mensaje} <br>`;
+                caja.innerHTML += `<h3>${resultado}</h3>`;
+                caja.innerHTML += `<hr>`;
+
+            }
+            comparar(contenedor1, contenedor2, mensaje = " Contenedor 1 en Contenedor 2");
+            comparar(contenedor2, contenedor1, mensaje = " Contenedor 2 en Contenedor 1");
+        };
+    </script>
+</body>
+
+</html>

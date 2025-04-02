@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            background: #1D202B;
+            color: white;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .cont {
+            margin: 10px auto;
+            background: #153841;
+            display: grid;
+            height: 500px;
+            width: 80%;
+            grid-template-columns: auto;
+            grid-template-rows: 60% 40%;
+        }
+
+        .caja1 {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-direction: column;
+        }
+
+        .caja2 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .caja2 p {
+            color: black;
+            background: white;
+            padding: 5px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="cont">
+        <div class="caja1">
+            <h1 class="title">5.- Refactorize el siguiente código utilizando sintaxis ES6 (Use rest y arrow función)
+            </h1>
+            <br>
+            <BUtton onclick="go()">Click</BUtton>
+            <br>
+
+        </div>
+        <div class="caja2">
+            <p class="parrafo"></p>
+        </div>
+    </div>
+
+    <Script>
+        let parrafo = document.querySelector(".parrafo");
+
+        const pares = (...nums) => nums.filter(num => num % 2 === 0);
+        
+        function go(){
+            let resultado = pares(2,1,6,7,3);
+            parrafo.innerHTML = resultado;
+        }
+
+    </Script>
+
+</html>

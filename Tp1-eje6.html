@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            background: #1D202B;
+            color: white;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .cont {
+            margin: 10px auto;
+            background: #153841;
+            display: grid;
+            height: 500px;
+            width: 80%;
+            grid-template-columns: auto;
+            grid-template-rows: 60% 40%;
+        }
+
+        .caja1 {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-direction: column;
+        }
+
+        .caja2 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .caja2 p {
+            color: black;
+            background: white;
+            padding: 5px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="cont">
+        <div class="caja1">
+            <h1 class="title">6.- Escriba una función buscarMinimo que acepte un número variable de argumentos y 
+                retorne el valor mas chico.</h1>
+            <br>
+            <input class="input" type="text">
+            <BUtton onclick="go()">Click</BUtton>
+            <br>
+
+        </div>
+        <div class="caja2">
+            <p class="parrafo"></p>
+        </div>
+    </div>
+    <script>
+        let p = document.querySelector(".parrafo");
+        let input = document.querySelector(".input");
+
+        let valorMinimo = (...nums) => {  /// const buscarMinimo = (...args) => Math.min(...args);
+            let menor = nums[0];
+            for (const num of nums) {
+                if (num < menor) {
+                    menor = num;
+                }
+            } return menor;
+        };
+
+        function go() {
+            p.innerHTML = valorMinimo(10, 40, 50, 500);
+        };
+
+    </script>
+
+</body>
+
+</html>

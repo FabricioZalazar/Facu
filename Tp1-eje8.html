@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            background: #1D202B;
+            color: white;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .cont {
+            margin: 10px auto;
+            background: #153841;
+            display: grid;
+            height: 1000px;
+            width: 80%;
+            grid-template-columns: auto;
+            grid-template-rows: 60% 40%;
+        }
+
+        .caja1 {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-direction: column;
+        }
+
+        .caja2 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .caja2 p {
+            color: black;
+            background: white;
+            padding: 5px;
+        }
+
+
+        .error {
+            color: red;
+            display: block;
+        }
+
+        .caja1 * {
+            margin-bottom: 10px;
+        }
+
+        @keyframes mover {
+            0% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(5px);
+            }
+
+            50% {
+                transform: translateX(0);
+            }
+
+            75% {
+                transform: translateX(-5px);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+
+        }
+
+        .bottonCargar:hover {
+            animation: mover 0.1s infinite;
+        }
+
+        .bottonCargar {
+            height: 20px;
+            transition: background-color 0.3s ease-in-out, height 0.3s ease-in-out, width 0.3s ease-in-out, border-radius 0.3s ease-in-out;
+        }
+
+        .bottonCargar:hover {
+            height: 30px;
+            width: 80px;
+            background-color: rgb(255, 255, 255);
+            border-radius: 10px;
+
+        }
+
+        .cajaBottonFiltra {
+            width: 300px;
+            display: flex;
+            justify-content: space-around;
+
+        }
+
+        .caja1 button {
+            width: 66px;
+        }
+
+        .errorInput {
+            border: 1px solid red;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="cont">
+        <div class="caja1">
+            <h1 class="title">8.- Desarrolle un formulario que solicite Año, Valor de inflación y Suceso.
+                Controle que año este entre 1900 y 2020.
+                Controle que Valor de inflación sea mayor a 0 y tenga 2 decimales.
+                Controle que suceso sea una cadena de hasta 20 caracteres.
+                Agregue un botón que permita cargar los valores en un array de objetos.
+                Agregue 3 botones que permitan imprimir un listado de los datos ordenados por Año, por
+                inflación y por Suceso.
+            </h1>
+            <br>
+            <label for="año">Año</label>
+            <input id="año" type="number" name="año" onfocus="limpiarErrores(event)" value="1990">
+            <label for="inlfa">Valor inflación</label>
+            <input id="infla" type="number" name="inlfa" onfocus="limpiarErrores(event)" value="1.22">
+            <label for="suceso">Suceso</label>
+            <input id="suceso" type="text" name="suceso" onfocus="limpiarErrores(event)" value="Jose">
+            <BUtton class="bottonCargar" onclick="control(), cargar()">Cargar</BUtton>
+            <div class="cajaBottonFiltra">
+                <button class="bottonFiltro" disabled onclick="FiltroAño()">Año</button>
+                <button class="bottonFiltro" disabled onclick="FiltroInfla()">Inflación</button>
+                <button class="bottonFiltro" disabled onclick="FiltroSuceso()">Suceso</button>
+            </div>
+
+
+
+        </div>
+        <div class="caja2">
+            
+        </div>
+    </div>
+    <script>
+        const p = document.querySelector(".caja2");
+        const año = document.getElementById("año");
+        const infla = document.getElementById("infla");
+        const suceso = document.getElementById("suceso");
+        let bandera;
+        let array = [];
+
+        class objeto {
+            constructor(año, infla, suceso) {
+                this.año = año;
+                this.infla = infla;
+                this.suceso = suceso;
+            }
+            toString() {
+                return `El Año es: ${this.año}, La Inflación es: ${this.infla}, El Suceso es: ${this.suceso}`;
+            }
+        }
+
+        function tieneDosDecimales(valor) {
+            // Expresión regular para verificar si el número tiene exactamente dos decimales
+            const regex = /^\d+\.\d{2}$/;
+            return regex.test(valor);
+        }
+
+        function control() {
+            bandera = false;
+            if (año.value == "" || isNaN(año.value) || año.value < 1900 || año.value > 2020) {
+                const spanError = document.createElement("span");
+                spanError.textContent = "* Año no valido";
+                spanError.className = "error";
+
+                if (año.nextSibling.nodeName != 'SPAN') {
+                    año.classList.add('errorInput');
+                    año.insertAdjacentElement("afterend", spanError);
+                }
+
+                bandera = true;
+            }
+
+            if (infla.value == "" || isNaN(infla.value) || infla.value < 0 || !tieneDosDecimales(infla.value)) {
+                const spanError = document.createElement("span");
+                spanError.textContent = "* Inlfacion no valido";
+                spanError.className = "error";
+
+                if (infla.nextSibling.nodeName != 'SPAN') {
+                    infla.classList.add('errorInput');
+                    infla.insertAdjacentElement("afterend", spanError);
+                }
+                bandera = true;
+            }
+
+            if (suceso.value == "" || !isNaN(suceso.value) || suceso.value.length > 20) {
+                const spanError = document.createElement("span");
+                spanError.textContent = "* Suceso no valido";
+                spanError.className = "error";
+
+                if (suceso.nextSibling.nodeName != 'SPAN') {
+                    suceso.classList.add('errorInput');
+                    suceso.insertAdjacentElement("afterend", spanError);
+                }
+                bandera = true;
+            }
+
+        }
+
+        function cargar() {
+            if (!bandera) {
+                array.push(new objeto(año.value, infla.value, suceso.value));
+                Array.from(document.getElementsByClassName("bottonFiltro")).forEach(boton => {
+                    boton.disabled = false;
+                });
+                console.log("cargo")
+            }
+        }
+
+        function FiltroAño() {
+            p.innerHTML = ` <ol class="lista"> </ol>`
+            let lista= document.querySelector(".lista");
+            let datosOrdenados = array.sort((a, b) => a.año - b.año);
+
+            for (const ele of datosOrdenados) {
+                lista.innerHTML += `<li>${ele.toString()}</li>`
+            }
+            
+
+        }
+
+        function FiltroInfla() {
+            p.innerHTML = ` <ol class="lista"> </ol>`
+            let lista= document.querySelector(".lista");
+            let datosOrdenados = array.sort((a, b) => a.infla - b.infla);
+
+            for (const ele of datosOrdenados) {
+                lista.innerHTML += `<li>${ele.toString()}</li>`
+            }
+            
+
+        }
+
+        function FiltroSuceso() {
+            p.innerHTML = ` <ol class="lista"> </ol>`
+            let lista= document.querySelector(".lista");
+            let datosOrdenados = array.sort((a, b) => a.suceso.localeCompare(b.suceso));
+
+            for (const ele of datosOrdenados) {
+                lista.innerHTML += `<li>${ele.toString()}</li>`
+            }
+            
+
+        }
+
+
+        function limpiarErrores(event) {
+            const actualInput = event.target;
+            actualInput.classList.remove('errorInput');
+            const actualHermano = actualInput.nextSibling;
+            if (actualHermano.nodeName == 'SPAN') {
+                actualHermano.remove();
+            }
+        }
+    </script>
+
+
+
+
+</body>
+
+</html>

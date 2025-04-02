@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            background: #1D202B;
+            color: white;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .cont {
+            margin: 10px auto;
+            background: #153841;
+            display: grid;
+            height: auto;
+            width: 80%;
+            grid-template-rows: 60% 40%;
+        }
+
+        .caja1 {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-direction: column;
+        }
+
+        .caja2 {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            max-height: 400px;
+            overflow: auto;
+           
+        }
+
+        .caja2 p {
+            margin: 0;
+            width: 400px;
+            color: black;
+            padding: 5px;
+            background-color: white;
+            transition:  background-color 0.3s ease-in-out;
+            
+           
+        }
+
+        .caja2 p:hover {
+            background-color: #24a5c5b9;
+
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="cont">
+        <div class="caja1">
+            <h1 class="title">9.- Escriba una librería javascript que permita autocompletar la entrada de un elemento
+                input de texto que tengan clase “autocomplete”.
+                input type=”text” class=”autocomplete”
+                La librería debe tener en un array su propia base de datos de palabras con las que puede
+                autocompletar.
+                A medida que el usuario va agregando una letra a la caja de texto la librería debe ir
+                proponiendo las palabras cuyo comienzo coincidan con lo escrito por el usuario.</h1>
+            <br>
+            <input class="autocomplete" type="text" oninput="autoComplete()">
+            <br>
+
+        </div>
+        <div class="caja2"></div>>
+
+    </div>
+    </div>
+
+    <script>
+        const palabras = [
+            "Argentina", "Automóvil", "Avión", "Azul", "Banco", "Barco", "Biblioteca", "Bicicleta", "Casa", "Celular",
+            "Computadora", "Concierto", "Deporte", "Desayuno", "Elefante", "Escuela", "Fútbol", "Fresa", "Guitarra",
+            "Helado", "Hospital", "Internet", "Jardín", "Lámpara", "Montaña", "Naranja", "Océano", "Película", "Playa",
+            "Programación", "Restaurante", "Robot", "Sol", "Teléfono", "Trabajo", "Universidad", "Viaje", "Zoológico",
+            "Amistad", "Análisis", "Aventura", "Baloncesto", "Batería", "Biología", "Cámara", "Camión", "Carpeta",
+            "Ciencia", "Cielo", "Cocina", "Cómic", "Corazón", "Cultura", "Derecho", "Dibujo", "Dinero", "Dinosaurio",
+            "Documento", "Economía", "Electricidad", "Enciclopedia", "Escultura", "Espacio", "Estadio", "Estrella",
+            "Examen", "Exploración", "Fábrica", "Familia", "Festival", "Filosofía", "Fotografía", "Frutas", "Fuego",
+            "Galaxia", "Gasolina", "Geografía", "Historia", "Hogar", "Hormiga", "Ilustración", "Imaginación",
+            "Impresora", "Instrumento", "Inteligencia", "Investigación", "Juego", "Láser", "Lectura", "Lenguaje",
+            "Libro", "Luz", "Matemáticas", "Medicina", "Mercado", "Música", "Naturaleza", "Neumático", "Noticia",
+            "Nube", "Ópera", "Ordenador", "Organización", "Parque", "Pintura", "Planeta", "Política", "Profesor",
+            "Química", "Red", "Refugio", "Revolución", "Salud", "Satélite", "Secretaria", "Seguridad", "Semáforo",
+            "Sistema", "Software", "Tecnología", "Tierra", "Transporte", "Vacaciones", "Videojuegos", "Violín",
+            "Vuelo", "Web", "Zafiro", "Zalacho", "Pichi"
+        ];
+        let caja = document.querySelector(".caja2");
+        let palabraInput = document.querySelector(".autocomplete");
+
+        function autoComplete() {
+            if (palabraInput.value === "") {
+                caja.innerHTML = ""; // Borra las sugerencias si el input está vacío
+                return;
+            }
+            caja.innerHTML = "";
+            for (const palabra of palabras) {
+                if (palabra.toLowerCase().startsWith(palabraInput.value)) {
+                    caja.innerHTML += `<p onclick="">${palabra}</p>`
+                }
+            }
+
+        }
+
+        
+
+    </script>
+</body>
+
+</html>

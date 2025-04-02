@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Round</title>
+    <style>
+        body {
+            margin-top: 10px;
+            background: #1D202B;
+            color: #fff;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .cont {
+
+            margin: 0 auto;
+            background: #153841;
+            height: auto;
+            min-height: 500px;
+            width: 80%;
+            display: grid;
+            grid-template-rows: 70% 30%;
+
+
+        }
+
+        .caja1 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .caja2 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            overflow: auto;
+            max-height: 80%;
+        }
+
+        .input {
+            margin: 0px 5px 0px 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cont">
+        <div class="caja1">
+            <label>Escriba aqui</LAbel>
+            <input class="input" type="text">
+            <button class="button" onclick="go()"> Click </button>
+        </div>
+        <div class="caja2">
+            <p class="text"></p>
+        </div>
+    </div>
+
+
+    <script>
+
+        let text = document.querySelector(".input");
+        const go = () => {
+            let valor = text.value;
+            if (!isNaN(valor) && valor.trim() !== "") {
+                valor= parseFloat(text.value);
+                const redondeo = (dig) => {       
+                    const factor = Math.pow(10, dig);
+                    return Math.round((valor + Number.EPSILON)* factor) / factor;
+                   
+                }
+                let caja2 = document.querySelector(".text");
+                caja2.innerHTML += `Redondeo ${redondeo(2)} <br>`;
+                caja2.innerHTML += `Redondeo ${redondeo(3)} <br>`;
+
+            } else {
+                alert("Error");
+            }
+        }
+
+
+    </script>
+</body>
+
+</html>

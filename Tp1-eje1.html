@@ -14,7 +14,7 @@
             margin-top: 10px;
             width: 200px;
             height: 100px;
-            position:absolute;
+            position:relative;
             left: 45%;
         }
     </style>
@@ -48,12 +48,10 @@
             let a = document.querySelector("#txt");
 
             let comparar = (contenedor1, contenedor2, mensaje) => {
-
                 let bandera = Object.keys(contenedor1).every(key => key in contenedor2);
                 let resultado = `Resultado = ${bandera} ${mensaje} <br>`;
                 caja.innerHTML += `<h3>${resultado}</h3>`;
                 caja.innerHTML += `<hr>`;
-
             }
             comparar(contenedor1, contenedor2, mensaje = " Contenedor 1 en Contenedor 2");
             comparar(contenedor2, contenedor1, mensaje = " Contenedor 2 en Contenedor 1");

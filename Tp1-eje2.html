@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hora</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin-top: 10px;
+            background: #1D202B;
+            color: #fff;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .cont {
+            margin: 0 auto;
+            display: grid;
+            height: 800px;
+            width: 80%;
+            background: rgb(0, 134, 134);
+            grid-template-areas:
+                'title title'
+                'reloj reloj'
+                'boton1 boton2';
+            grid-template-rows: 10% auto 20%;
+
+        }
+
+        .title {
+            grid-area: title;
+            border: 2px solid black;
+            text-align: center;
+            text-size-adjust: 20px;
+        }
+
+        .reloj {
+
+            grid-area: reloj;
+            border: 2px solid #fff;
+            text-align: center;
+            line-height: 200px;
+
+        }
+
+        .boton1 {
+            grid-area: boton1;
+        }
+
+        .boton2 {
+            grid-area: boton2;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cont">
+
+        <p class="title">2.- Escriba un programa javascript que muestre en una página la fecha y hora en tiempo
+            real.
+            El formato de la fecha debe ser:
+            Hoy es Jueves, 22 de Marzo de 1998
+            La hora actual es 8:23:05 PM
+            Utilice los template literals para imprimir los datos.
+            Ej: innerHTML = (`La hora actual es : ${hora}:${minuto}:${segundo} ${pmam}`);
+            Nota: Averigue como funciona la función toLocaleDateString</p>
+        <h1 class="reloj"></h1>
+        <button class="boton1" onclick="go()">GO</button>
+        <button class="boton2" onclick="basta()">Cancelar</button>
+
+    </div>
+
+    <script>
+        let reloj = document.querySelector(".reloj");
+        let intervalo = null;
+
+        const actualizarHora = () => {
+
+            let fecha = new Date;
+
+            let opcionesFecha = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
+
+            let fechaFormateada = fecha.toLocaleDateString("es-ES", opcionesFecha);
+
+            let opcionesHora = { hour: "numeric", minute: "numeric", second: "numeric", hour12: true };
+
+            let horaFormateada = fecha.toLocaleTimeString("es-ES", opcionesHora);
+
+            reloj.innerHTML = `Hoy es ${fechaFormateada} <br> La hora actual es ${horaFormateada}`;
+
+
+        };
+
+        const go = () => {
+            if (!intervalo) {
+                actualizarHora();
+                intervalo = setInterval(actualizarHora, 1000);
+            }
+        };
+
+
+        const basta = () => {
+            reloj.innerHTML = "";
+            clearInterval(intervalo);
+            intervalo = null;
+        };
+
+
+    </script>
+</body>
+
+</html>

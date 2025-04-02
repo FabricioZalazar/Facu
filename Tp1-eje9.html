@@ -17,7 +17,7 @@
             margin: 10px auto;
             background: #153841;
             display: grid;
-            height: auto;
+            height: 800px;
             width: 80%;
             grid-template-rows: 60% 40%;
         }
@@ -73,7 +73,7 @@
             <br>
 
         </div>
-        <div class="caja2"></div>>
+        <div class="caja2"></div>
 
     </div>
     </div>
@@ -105,14 +105,23 @@
                 return;
             }
             caja.innerHTML = "";
+            let i=0;
             for (const palabra of palabras) {
-                if (palabra.toLowerCase().startsWith(palabraInput.value)) {
-                    caja.innerHTML += `<p onclick="">${palabra}</p>`
+                if (palabra.toLowerCase().startsWith(palabraInput.value.toLowerCase())) {
+                    caja.innerHTML += `<p class="pAuto" onclick="selec(${i})">${palabra}</p>`
+                    i++;
                 }
+                
             }
 
         }
 
+        function selec(index){
+            let a =document.getElementsByClassName("pAuto")[index];
+            palabraInput.value = a.textContent ;
+            autoComplete();
+            caja.innerHTML = "";
+        }
         
 
     </script>

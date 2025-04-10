@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //4.- Suponga que tiene una lista de valores con elementos duplicados. Por ej.  
+        //   [‘jose’,’juan’,’ana’,’jose’,’carlos’,’rosa’,’ana’]  
+        //   Escriba al menos 2 alternativas para generar una lista sin los valores duplicados.
+
+        let arrayOrigin= ["jose","juan","ana","jose","carlos","rosa","ana"];
+
+        let arrayLet= new Set();
+        for (const element of arrayOrigin) {
+            arrayLet.add(element);
+        }
+
+        let arrayFiltro=arrayOrigin.filter( (num,index) =>  arrayOrigin.indexOf(num) === index );
+
+        
+        console.log(arrayOrigin);
+
+        console.log(arrayLet);
+
+        console.log(arrayFiltro);
+
+    </script>
+</body>
+
+</html>

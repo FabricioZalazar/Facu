@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class persona {
+            nombre;
+            edad;
+            #altura;
+            #peso;
+
+            constructor(nombre, edad, altura, peso) {
+                this.nombre = nombre;
+                this.edad = edad;
+                this.#altura = altura;
+                this.#peso = peso;
+
+            };
+
+            informe() {
+                return `Nombre: ${this.nombre} Edad: ${this.edad} Altura: ${this.#altura} Peso: ${this.#peso}`;
+            };
+
+            getAltura() {
+                return this.#altura;
+            }
+
+            getPeso() {
+                return this.#peso;
+            }
+        };
+
+        class empleado extends persona {
+            #sueldo;
+            static cantEmpleados = 0;
+            constructor(nombre, edad, altura, peso, sueldo) {
+                super(nombre, edad, altura, peso);
+                this.#sueldo = sueldo;
+                empleado.cantEmpleados++;
+            }
+
+            informe() {
+                return `Nombre: ${this.nombre} Edad: ${this.edad} Altura: ${this.getAltura()} Peso: ${this.getPeso()} Sueldo ${this.#sueldo}`
+            };
+
+            static getCantidadEmpleados() {
+                return empleado.cantEmpleados;
+            }
+
+
+        };
+
+        function imprimirResumen(x) {
+            console.log(x.informe());
+        }
+        
+        const p1 = new persona("Carlos", 30, 1.75, 80);
+        const e1 = new empleado("Ana", 25, 1.68, 65, 5000);
+        const e2 = new empleado("Luis", 40, 1.80, 85, 7000);
+
+        console.log("Resumen de persona:");
+        imprimirResumen(p1);
+
+        console.log("\nResumen de empleados:");
+        imprimirResumen(e1);
+        imprimirResumen(e2);
+
+        console.log(`\nCantidad de empleados creados: ${empleado.getCantidadEmpleados()}`);
+
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Persona {
+            nombre;
+            apellido;
+            documento;
+            altura;
+            peso;
+
+            constructor(nombre, apellido, documento, altura, peso) {
+                this.nombre = nombre;
+                this.apellido = apellido;
+                this.documento = documento;
+                this.altura = altura;
+                this.peso = peso;
+            };
+
+            toString() {
+                return `Nombre: ${this.nombre} Apellido: ${this.apellido} Documento: ${this.documento} Altura: ${this.altura} Peso: ${this.peso}Kg`
+            }
+
+            calcularIMC() {
+                //Peso (Kg) / Estatura al cuadrado (Mt)
+                return (this.peso / (this.altura * this.altura )).toFixed(2);
+            }
+        }
+
+        let Personas = [new Persona("Fabricio", "Zalazar", 43072929, 1.82, 90), new Persona("Karen", "Albornoz", 44651161, 1.70, 72), new Persona("Jose", "Perez", 20432128, 1.60, 102)]
+
+        console.log("Bucle for");
+        for (let index = 0; index < Personas.length; index++) {
+            console.log(Personas[index].toString()+" IMC "+ Personas[index].calcularIMC());
+        }
+
+        console.log("\nBucle for in");
+        for (const key in Personas) {
+            console.log(Personas[key].toString()+" IMC "+Personas[key].calcularIMC());
+        }
+        console.log("\nBucle for of");
+        for (const ele of Personas) {
+            console.log(ele.toString()+" IMC "+ele.calcularIMC());
+        }
+        console.log("\nBucle for each");
+        Personas.forEach(ele => {
+            console.log(ele.toString()+" IMC "+ele.calcularIMC());
+        });
+
+
+
+    </script>
+</body>
+
+</html>

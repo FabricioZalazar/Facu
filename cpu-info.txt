@@ -1,0 +1,90 @@
+[
+  {
+    "model": "AMD Ryzen 3 4100 4-Core Processor              ",
+    "speed": 3800,
+    "times": {
+      "user": 189843,
+      "nice": 0,
+      "sys": 285906,
+      "idle": 6369281,
+      "irq": 52218
+    }
+  },
+  {
+    "model": "AMD Ryzen 3 4100 4-Core Processor              ",
+    "speed": 3800,
+    "times": {
+      "user": 155703,
+      "nice": 0,
+      "sys": 171656,
+      "idle": 6517546,
+      "irq": 13390
+    }
+  },
+  {
+    "model": "AMD Ryzen 3 4100 4-Core Processor              ",
+    "speed": 3800,
+    "times": {
+      "user": 385453,
+      "nice": 0,
+      "sys": 167343,
+      "idle": 6292109,
+      "irq": 3093
+    }
+  },
+  {
+    "model": "AMD Ryzen 3 4100 4-Core Processor              ",
+    "speed": 3800,
+    "times": {
+      "user": 166328,
+      "nice": 0,
+      "sys": 61953,
+      "idle": 6616625,
+      "irq": 1046
+    }
+  },
+  {
+    "model": "AMD Ryzen 3 4100 4-Core Processor              ",
+    "speed": 3800,
+    "times": {
+      "user": 250593,
+      "nice": 0,
+      "sys": 128218,
+      "idle": 6466093,
+      "irq": 2937
+    }
+  },
+  {
+    "model": "AMD Ryzen 3 4100 4-Core Processor              ",
+    "speed": 3800,
+    "times": {
+      "user": 162703,
+      "nice": 0,
+      "sys": 65578,
+      "idle": 6616625,
+      "irq": 1609
+    }
+  },
+  {
+    "model": "AMD Ryzen 3 4100 4-Core Processor              ",
+    "speed": 3800,
+    "times": {
+      "user": 219406,
+      "nice": 0,
+      "sys": 114390,
+      "idle": 6511109,
+      "irq": 6109
+    }
+  },
+  {
+    "model": "AMD Ryzen 3 4100 4-Core Processor              ",
+    "speed": 3800,
+    "times": {
+      "user": 201562,
+      "nice": 0,
+      "sys": 164031,
+      "idle": 6479312,
+      "irq": 83625
+    }
+  }
+]

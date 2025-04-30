@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        button {
+            margin: 10px;
+            padding: 5px 10px;
+            transition: background-color 0.4s ease-in-out, border-radius 0.5s ease-in-out, transform 0.5s ease-in-out;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            background-color: rgba(121, 188, 233, 0.877);
+            border-radius: 5px;
+            border: none;
+
+        }
+
+        #resultado {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="btnPersonas" onclick="mostrarPersonas()">Personas</button>
+    <button id="btnPersona3" onclick="mostrarPersona3()">Personas</button>
+    <button id="btnDatos" onclick="mostrarDatos()">Solo Datos</button>
+    <button id="btnMayores24" onclick="mostrarMayoresDe24()">Mayores a 24 años</button>
+    <button id="btnOrdXNombres" onclick="mostrarOrdXNombre()">Ordenadas por nombre</button>
+    <button id="btnAlMenos2Hobbies" onclick="mostrarAlMenos2Hobbies()">Al Menos de 2 hobbies</button>
+    <button id="btnSoloHobbies" onclick="mostrarHobbies()">Solo hobbies</button>
+    <button id="btnNombresEmpleados" onclick="mostrarEmpleados()">Nombres de personas que son Empleados</button>
+    <h2>Resultado</h2>
+    <div id="resultado"></div>
+
+
+    <script>
+        const personas = [
+            {
+                id: 1,
+                datos: {
+                    nombre: "Jose",
+                    edad: 39,
+                    empleado: true,
+                    hobbies: ["tenis"],
+                },
+            },
+            {
+                id: 2,
+                datos: {
+                    nombre: "Manuel",
+                    edad: 23,
+                    empleado: true,
+
+                },
+            },
+            {
+                id: 3,
+                datos: {
+                    nombre: "Abigail",
+                    edad: 25,
+                    empleado: false,
+                    hobbies: ["basquet", "tenis", "futbol"],
+                },
+            },
+            {
+                id: 4,
+                datos: {
+                    nombre: "Fabiana",
+                    edad: 12,
+                    empleado: true,
+                    hobbies: ["tenis", "golf"],
+                },
+            },
+        ];
+
+        mostrarPersonas = () => { mostrar(personas) };
+
+        mostrarPersona3 = () => {
+            let lista = [personas[2]]
+            mostrar(lista);
+        }
+
+        mostrarDatos = () => {
+            let DatosPersonas = [];
+            for (const ele of personas) {
+                DatosPersonas.push(ele.datos);
+            }
+            mostrar(DatosPersonas);
+        }
+
+        mostrarMayoresDe24 = () => {
+            let personasMayores24 = [];
+            for (const pers of personas) {
+                if (pers.datos.edad > 24) {
+                    personasMayores24.push(pers);
+                }
+            }
+            mostrar(personasMayores24);
+        }
+
+        mostrarOrdXNombre = () => {
+            let Ordenado = personas.slice().sort((a, b) => a.datos.nombre.localeCompare(b.datos.nombre));
+            mostrar(Ordenado);
+        }
+
+        mostrarAlMenos2Hobbies = () => {
+            let personasAlMenos2 = [];
+            for (const per of personas) {
+                if (per.datos.hobbies && per.datos.hobbies.length >= 2) {
+                    personasAlMenos2.push(per);
+                }
+            }
+            mostrar(personasAlMenos2);
+        }
+
+        mostrarHobbies = () => {
+            let hobbies = new Set;
+            for (const per of personas) {
+                if (per.datos.hobbies) {
+                    for (const ele of per.datos.hobbies) {
+                        hobbies.add(ele);
+                    }
+                }
+            }
+            mostrar(hobbies);
+        }
+
+        mostrarEmpleados = () => {
+            let Empleados = [];
+
+            for (const per of personas) {
+                if (per.datos.empleado) {
+                    Empleados.push(per.datos.nombre);
+                }
+            }
+            mostrar(Empleados);
+        }
+
+        function mostrar(lista) {
+            let div = document.getElementById("resultado");
+            div.innerHTML = "";
+            if (lista.length === 0) {
+                div.innerHTML = "<p>No se encuentran resultados.</p>";
+                return;
+            }
+            for (const lis of lista) {
+                let contenido = `<p> `;
+
+                if (typeof lis == "string") {
+                    contenido += `${lis} </p>`;
+                } else {
+
+                    if (lis.id) {
+                        contenido += `
+                              ID: ${lis.id} <br> 
+                              Nombre: ${lis.datos.nombre} <br> 
+                              Edad: ${lis.datos.edad} <br> 
+                              Empleado: ${lis.datos.empleado} <br>`
+
+                        if (lis.datos.hobbies) {
+                            contenido += `Hobbies: ${lis.datos.hobbies.join(", ")} <br>`;
+                        }
+
+                    } else {
+                        contenido += `Nombre: ${lis.nombre} <br> 
+                              Edad: ${lis.edad} <br> 
+                              Empleado: ${lis.empleado} <br>`
+                        if (lis.hobbies) {
+                            contenido += `Hobbies: ${lis.hobbies.join(", ")} <br>`;
+                        }
+                    }
+                }
+                contenido += `</p><hr>`;
+                div.innerHTML += contenido;
+            }
+
+
+        }
+
+
+
+
+
+    </script>
+</body>
+
+</html>

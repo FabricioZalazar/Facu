@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestor de Libros</title>
+</head>
+<body>
+  <h1>Gestión de Libros</h1>
+
+  <!-- a. Cargar un nuevo libro -->
+  <h2>Agregar nuevo libro</h2>
+  <input type="text" id="id" placeholder="ID">
+  <input type="text" id="name" placeholder="Nombre">
+  <input type="text" id="author" placeholder="Autor">
+  <input type="text" id="series" placeholder="Serie">
+  <input type="text" id="genre" placeholder="Género">
+  <input type="text" id="labels" placeholder="Etiquetas (separadas por coma)">
+  <input type="number" id="price" placeholder="Precio">
+  <input type="number" id="pages" placeholder="Cantidad de páginas">
+  <button onclick="agregarLibro()">Agregar libro</button>
+
+  <!-- b. Ver todos los libros -->
+  <h2>Ver todos los libros</h2>
+  <button onclick="mostrarTodos()">Mostrar todos</button>
+
+  <!-- c. Ver libros por precio -->
+  <h2>Filtrar libros por precio</h2>
+  <input type="number" id="precioFiltro" placeholder="Precio mínimo">
+  <button onclick="filtrarPorPrecio()">Filtrar por precio</button>
+
+  <!-- d. Ver libros por etiqueta -->
+  <h2>Filtrar libros por etiqueta</h2>
+  <input type="text" id="etiquetaFiltro" placeholder="Etiqueta">
+  <button onclick="filtrarPorEtiqueta()">Filtrar por etiqueta</button>
+
+  <!-- Área para mostrar los resultados -->
+  <h2>Resultado</h2>
+  <div id="resultado"></div>
+
+  <script>
+    // Array con libros iniciales (según el JSON del ejercicio)
+    let libros = [
+      {
+        "id": "978-0641723445",
+        "label": ["book", "hardcover"],
+        "name": "The Lightning Thief",
+        "author": "Rick Riordan",
+        "series_t": "Percy Jackson and the Olympians",
+        "genre_s": "fantasy",
+        "inStock": true,
+        "price": 12,
+        "pages_i": 384
+      },
+      {
+        "id": "978-1857995879",
+        "label": ["book", "paperback"],
+        "name": "Sophie's World : The Greek Philosophers",
+        "author": "Jostein Gaarder",
+        "genre_s": "fantasy",
+        "inStock": true,
+        "price": 3,
+        "pages_i": 64
+      },
+      {
+        "id": "978-1933988177",
+        "label": ["Article", "paperback"],
+        "name": "Lucene in Action, Second Edition",
+        "author": "Michael McCandless",
+        "genre_s": "IT",
+        "inStock": true,
+        "price": 30,
+        "pages_i": 475
+      }
+    ];
+
+    // a. Agregar un nuevo libro
+    function agregarLibro() {
+      const nuevo = {
+        id: document.getElementById("id").value,
+        name: document.getElementById("name").value,
+        author: document.getElementById("author").value,
+        series_t: document.getElementById("series").value,
+        genre_s: document.getElementById("genre").value,
+        label: document.getElementById("labels").value.split(',').map(e => e.trim()),
+        price: parseFloat(document.getElementById("price").value),
+        pages_i: parseInt(document.getElementById("pages").value),
+        inStock: true
+      };
+      libros.push(nuevo);
+      alert("Libro agregado con éxito");
+    }
+
+    // b. Mostrar todos los libros
+    function mostrarTodos() {
+      mostrar(libros);
+    }
+
+    // c. Filtrar libros por precio
+    function filtrarPorPrecio() {
+      const min = parseFloat(document.getElementById("precioFiltro").value);
+      const filtrados = libros.filter(libro => libro.price > min);
+      mostrar(filtrados);
+    }
+
+    // d. Filtrar libros por etiqueta
+    function filtrarPorEtiqueta() {
+      const etiqueta = document.getElementById("etiquetaFiltro").value.toLowerCase();
+      const filtrados = libros.filter(libro => 
+        libro.label.some(et => et.toLowerCase() === etiqueta)
+      );
+      mostrar(filtrados);
+    }
+
+    // Función para mostrar libros en pantalla
+    function mostrar(lista) {
+      const div = document.getElementById("resultado");
+      div.innerHTML = "";
+      if (lista.length === 0) {
+        div.innerHTML = "<p>No se encontraron libros.</p>";
+        return;
+      }
+      lista.forEach(libro => {
+        div.innerHTML += `
+          <div style="margin-bottom: 15px;">
+            <strong>${libro.name}</strong> (${libro.author})<br>
+            ID: ${libro.id}<br>
+            Género: ${libro.genre_s}<br>
+            Precio: $${libro.price}<br>
+            Páginas: ${libro.pages_i}<br>
+            Etiquetas: ${libro.label.join(", ")}<br>
+            <hr>
+          </div>
+        `;
+      });
+    }
+  </script>
+</body>
+</html>

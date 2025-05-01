@@ -1,0 +1,66 @@
+[
+  {
+    "nombrePelicula": "Spirited Away",
+    "nombreLocalidad": [
+      "Zeniba's Cottage",
+      "Bathhouse"
+    ]
+  },
+  {
+    "nombrePelicula": "The Cat Returns",
+    "nombreLocalidad": [
+      "The Cat Kingdom"
+    ]
+  },
+  {
+    "nombrePelicula": "Howl's Moving Castle",
+    "nombreLocalidad": [
+      "Ingary"
+    ]
+  },
+  {
+    "nombrePelicula": "Tales from Earthsea",
+    "nombreLocalidad": []
+  },
+  {
+    "nombrePelicula": "Ponyo",
+    "nombreLocalidad": [
+      "Fujimoto's Underwater Harbor",
+      "Himawari Nursery School"
+    ]
+  },
+  {
+    "nombrePelicula": "Arrietty",
+    "nombreLocalidad": []
+  },
+  {
+    "nombrePelicula": "From Up on Poppy Hill",
+    "nombreLocalidad": []
+  },
+  {
+    "nombrePelicula": "The Wind Rises",
+    "nombreLocalidad": []
+  },
+  {
+    "nombrePelicula": "The Tale of the Princess Kaguya",
+    "nombreLocalidad": [
+      "Bamboo Forest"
+    ]
+  },
+  {
+    "nombrePelicula": "When Marnie Was There",
+    "nombreLocalidad": [
+      "The Marsh House"
+    ]
+  },
+  {
+    "nombrePelicula": "The Red Turtle",
+    "nombreLocalidad": []
+  },
+  {
+    "nombrePelicula": "Earwig and the Witch",
+    "nombreLocalidad": [
+      "St. Morwald's Home for Children"
+    ]
+  }
+]

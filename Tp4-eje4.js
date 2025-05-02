@@ -1,7 +1,114 @@
-const request = require('request');
-const fs = require('fs');
-const { json } = require('stream/consumers');
+const fs = require('fs/promises');
 
+async function leerArchivo() {
+
+    try {
+        const movies = await(await fetch('https://ghibliapi.vercel.app/films')).json();
+        console.log('Processing our list of movies');
+
+        // Encabezado del CSV
+        let csvContent = 'Title,Release Date\n';
+        let csvContent2011 = 'Title,Release Date\n';
+
+        // Agregar películas
+        movies.forEach(movie => {
+            csvContent += `"${movie.title}","${movie.release_date}"\n`;
+            if (movie.release_date == 2011) {
+                csvContent2011 += `"${movie.title}","${movie.release_date}"\n`;
+            }
+        });
+
+                const locations = await (await fetch("https://ghibliapi.vercel.app/locations")).json(); // Convierte la respuesta en JSON
+                const jsonCont = [];
+
+                movies.filter(movie => parseInt(movie.release_date) > 2000)
+                    .forEach(movie => {
+                        const movieUrl = movie.url;
+                        const locationsXurl = locations.filter(loc => loc.films.includes(movieUrl));
+                        jsonCont.push({
+                            nombrePelicula: movie.title,
+                            nombreLocalidad: locationsXurl.map(loc => loc.name)
+                        });
+                    });
+                
+                await Promise.all([
+                    fs.writeFile('callbackMoviesLocations.json', JSON.stringify(jsonCont, null, 2)),
+                    fs.writeFile('callbackMovies.csv', csvContent),
+                    fs.writeFile('callbackMovies2011.csv', csvContent2011)
+                ]);
+                console.log('✅ Todos los archivos fueron creados exitosamente.')
+    } catch (err) {
+        console.error(`Could not send request to API: ${err.message}`);
+    };}
+
+    leerArchivo();
+
+
+/* fetch('https://ghibliapi.vercel.app/films')
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Error en la respuesta: ' + response.status);
+        }
+        return response.json(); // Convierte la respuesta en JSON
+    })
+    .then(movies => {
+        console.log('Processing our list of movies');
+
+        // Encabezado del CSV
+        let csvContent = 'Title,Release Date\n';
+        let csvContent2011 = 'Title,Release Date\n';
+        let jsonCont = [];
+
+        // Agregar películas
+        movies.forEach(movie => {
+            csvContent += `"${movie.title}","${movie.release_date}"\n`;
+            if (movie.release_date == 2011) {
+                csvContent2011 += `"${movie.title}","${movie.release_date}"\n`;
+            }
+        });
+
+        fetch("https://ghibliapi.vercel.app/locations")
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error en la respuesta: ' + response.status);
+                }
+                return response.json(); // Convierte la respuesta en JSON
+            })
+            .then(locations => {
+                const jsonCont = [];
+
+                movies.filter(movie => parseInt(movie.release_date) > 2000)
+                    .forEach(movie => {
+                        const movieUrl = movie.url;
+                        const locationsXurl = locations.filter(loc => loc.films.includes(movieUrl));
+                        jsonCont.push({
+                            nombrePelicula: movie.title,
+                            nombreLocalidad: locationsXurl.map(loc => loc.name)
+                        });
+                    });
+
+
+
+                return Promise.all([
+                    fs.writeFile('callbackMoviesLocations.json', JSON.stringify(jsonCont, null, 2)),
+                    fs.writeFile('callbackMovies.csv', csvContent),
+                    fs.writeFile('callbackMovies2011.csv', csvContent2011)
+                ]);
+
+            }).then(() => {
+                console.log('✅ Todos los archivos fueron creados exitosamente.');
+            }).catch(err => {
+                console.error(`Could not send request to API: ${err.message}`);
+                return;
+            });
+
+    });
+
+
+ */
+
+/* 
+const request = require('request');
 request('https://ghibliapi.vercel.app/films', (error, response, body) => {
     if (error) {
         console.error(`Could not send request to API: ${error.message}`);
@@ -83,7 +190,8 @@ request('https://ghibliapi.vercel.app/films', (error, response, body) => {
     }
     );
 
-});
+}); */
+
 /* ¿Cuáles són los párametros del callback? 
 
 Error(Que se usa para imprimir para ver el msg de error)

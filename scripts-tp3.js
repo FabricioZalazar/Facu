@@ -41,5 +41,3 @@ document.querySelectorAll('input[name="genero"]').forEach(radio=>
           
     })
 document.getElementById('listaUsers').innerHTML = liUsers;}));
-const os= require('os');
-        console.log('Arquitectura:', os.arch());
